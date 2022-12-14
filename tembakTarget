@@ -1,0 +1,61 @@
+import java.util.*;
+public class tembakTarget {
+    public static void main(String[] args) {
+        Scanner Input = new Scanner(System.in);
+
+        int BarisPapan = Input.nextInt();
+        int KolomPapan = Input.nextInt();
+
+        String[][] Papan = new String[BarisPapan][KolomPapan];
+        for (int i = 0; i < BarisPapan; i++) {
+            for (int j = 0; j < KolomPapan; j++) {
+                Papan[i][j] = ".";
+            }
+        }
+        int BarisKoordinat = Input.nextInt();
+        int KolomKoordinat = Input.nextInt();
+
+        Papan[BarisKoordinat][KolomKoordinat] = "O";
+
+        int BanyakTembakan = Input.nextInt();
+        int i = 0;
+        while (i < BanyakTembakan) {
+            int j = 0;
+            while (j < 1) {
+                int BarisTembakan = Input.nextInt();
+                int KolomTembakan = Input.nextInt();
+
+                PapanTembak(BarisTembakan, KolomTembakan, BarisKoordinat, KolomKoordinat, Papan);
+
+                for (int x = 0; x < BarisPapan; x++) {
+                    int y = 0;
+                    while (y < KolomPapan) {
+                        System.out.print(Papan[x][y]);
+                        y++;
+                    }
+                    System.out.println();
+                }
+                j++;
+            }
+            i++;
+        }
+    }
+
+    private static void PapanTembak(int BarisTembakan, int KolomTembakan, int BarisKoordinat, int KolomTarget, String[][] Papan) {
+
+        if (BarisKoordinat == BarisTembakan && KolomTarget == KolomTembakan) {
+            Papan[BarisTembakan][KolomTembakan] = "W";
+        } else {
+            Papan[BarisTembakan][KolomTembakan] = "X";
+        }
+        if (BarisKoordinat == BarisTembakan && KolomTarget == KolomTembakan) {
+            System.out.println("Bullseye");
+        } else if ((BarisKoordinat + 1) == BarisTembakan && KolomTarget == KolomTembakan || (BarisKoordinat - 1) == BarisTembakan && KolomTarget == KolomTembakan) {
+            System.out.println("Near Miss");
+        } else if (BarisKoordinat == BarisTembakan && (KolomTarget - 1) == KolomTembakan || BarisKoordinat == BarisTembakan && (KolomTarget + 1) == KolomTembakan) {
+            System.out.println("Near Miss");
+        } else {
+            System.out.println("Miss");
+        }
+    }
+}
